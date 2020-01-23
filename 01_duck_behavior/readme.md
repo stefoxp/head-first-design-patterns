@@ -1,4 +1,6 @@
-# Testing duck behaviors
+# Steps
+
+## Testing duck behaviors
 
 - [Duck.java](Duck.java);
 - [MallardDuck.java](MallardDuck.java);
@@ -10,3 +12,8 @@
   - [MuteQuack.java](MuteQuack.java);
   - [Squeak.java](Squeak.java);
 - [MiniDuckSimulator.java](MiniDuckSimulator.java);
+
+## Dynamic behaviors
+
+- [ModelDuck.java](ModelDuck.java);
+- [FlyRocketPowered.java](FlyRocketPowered.java);
