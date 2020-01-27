@@ -4,9 +4,9 @@ Eric Freeman & Elisabeth Freeman
 
 ## Concepts
 
-- [Welcome to Design Patterns](welcome_to_design_patterns.md);
-- [Keeping your Objects in the know](keeping_your_objects_in_the_know.md);
+- [1 Welcome to Design Patterns](welcome_to_design_patterns.md);
+- [2 Keeping your Objects in the know](keeping_your_objects_in_the_know.md);
 
 ## Book's samples
 
-- [duck behavior](01_duck_behavior);
+- [01 duck behavior](01_duck_behavior);

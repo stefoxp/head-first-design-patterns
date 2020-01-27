@@ -29,9 +29,10 @@ a = getAnimal();
 animal.makeSound();
 ```
 
-[Testing duck behaviors](testing_duck_behaviors.md)
+Sample code: [Testing duck behaviors](01_duck_behavior)
 
 a3. Favor **composition** over inheritance
+a4. Strive for loosely coupled designs between objects that interact
 
 ## Design Patterns (b)
 
@@ -43,4 +44,4 @@ Design Patterns give you a **shared vocabulary** with other developers:
 - shared vocabularies can turbo charge your development team
 - shared vocabularies encourage more junior developers to get up to speed
 
-b1. the Strategy Pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+b1. the **Strategy Pattern** defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
