@@ -3,6 +3,7 @@
 ## Design principles (a)
 
 a1. Identify the aspects of your application that vary and separate them (**encapsulate** it) from what stays the same
+
 a2. Program to an interface, not an implementation. Program to an interface really means Program to a **supertype** (abstract class or interface)
 
 Example:
@@ -32,7 +33,8 @@ animal.makeSound();
 Sample code: [Testing duck behaviors](01_duck_behavior)
 
 a3. Favor **composition** over inheritance
-a4. Strive for loosely coupled designs between objects that interact
+
+a4. Strive for **loosely coupled designs** between objects that interact
 
 ## Design Patterns (b)
 
@@ -45,3 +47,5 @@ Design Patterns give you a **shared vocabulary** with other developers:
 - shared vocabularies encourage more junior developers to get up to speed
 
 b1. the **Strategy Pattern** defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+
+b2. the **Observer Pattern** defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically

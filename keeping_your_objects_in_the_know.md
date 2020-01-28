@@ -211,3 +211,7 @@ The java.util.Observable implementation has a number of problems that limit its 
 
 - Observable is a class (not an interface -> violate a first OO Design Principle)
 - Observable protects crucial methods (-> violates a second OO Design Principle)
+
+Observable may serve your needs if you can extend java.util.Observable.
+
+Both JavaBeans and Swing also provide their own implementations of the pattern.
