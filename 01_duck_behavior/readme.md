@@ -1,6 +1,6 @@
-# Steps
+# Duck Behaviors
 
-## Testing duck behaviors
+## Testing
 
 - [Duck.java](Duck.java);
 - [MallardDuck.java](MallardDuck.java);
