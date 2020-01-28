@@ -52,7 +52,7 @@ What's wrong with our implementation?
 - coding to concrete implementations is bad
 - update() method takes the same values
 
-## the Observer Pattern
+### the Observer Pattern
 
 Publishers + Subscribers = Observer Pattern
 
@@ -66,30 +66,30 @@ and
 
 >the Observer Pattern defines a one-to-many relationship between a set of objects. When the state of one object (the subject) changes, all of its dependent objects (the observers) are notified.
 
-### The class diagram
+#### Observer Pattern: the class diagram
 
 ```java
 interface Subject {
-    void registerObserver()
-    void removeObserver()
-    void notifyObservers()
+    registerObserver()
+    removeObserver()
+    notifyObservers()
 }
 
 interface Observer {
-    void update()
+    update()
 }
 
-class ConcreteSubject {
-    void registerObserver() {}
-    void removeObserver() {}
-    void notifyObservers() {}
+class ConcreteSubject implements Subject {
+    registerObserver() {}
+    removeObserver() {}
+    notifyObservers() {}
 
-    int getState()
-    void setState()
+    getState()
+    setState()
 }
 
-class ConcreteObserver {
-    void update() {}
+class ConcreteObserver implements Observer {
+    update() {}
     // other Observer specific methods
 }
 
@@ -107,7 +107,7 @@ The Observer Pattern provides an object design where subjects and observers are 
 
 Loosely coupled designs allow us to build flexible OO systems that can handle change because they minimize the interdependency between objects.
 
-### Weather Monitoring application: Second implementation
+### Weather Monitoring application: the second implementation
 
 ```java
 // Subject.java
@@ -170,3 +170,44 @@ class ForecastDisplay implements Observer, DisplayElement {
 ```
 
 - Implementation Code [Weather Monitoring application 02](02_weather_monitoring_application)
+
+### Weather Monitoring application: implementation with Java's built-in Observer Pattern
+
+```java
+class Observable {
+    addObserver()
+    deleteObserver()
+    notifyObservers()
+    setChanged()
+}
+
+interface Observer {
+    update()
+}
+
+class WeatherData extends Observable {
+    getTemperature()
+    getHumidity()
+    getPressure()
+}
+
+class GeneralDisplay implements Observer {
+    update()
+    display()
+}
+
+class StatisticsDisplay implements Observer {
+    update()
+    display()
+}
+
+class ForecastDisplay implements Observer {
+    update()
+    display()
+}
+```
+
+The java.util.Observable implementation has a number of problems that limit its usefulness and reuse:
+
+- Observable is a class (not an interface -> violate a first OO Design Principle)
+- Observable protects crucial methods (-> violates a second OO Design Principle)
