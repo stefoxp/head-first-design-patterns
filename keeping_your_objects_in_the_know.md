@@ -1,4 +1,4 @@
-# 2 Keeping your Objects in the know
+# 02 Keeping your Objects in the know
 
 >Observer Pattern
 

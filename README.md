@@ -4,8 +4,14 @@ Eric Freeman & Elisabeth Freeman
 
 ## Concepts
 
+- [Design Patterns](design_patterns.md)
+- [Design Principles](design_principles.md)
+
+## Chapters
+
 1. [Welcome to Design Patterns](welcome_to_design_patterns.md);
 2. [Keeping your Objects in the know](keeping_your_objects_in_the_know.md);
+3. [Decorating Objects](decorating_objects.md);
 
 ## Book's samples
 
