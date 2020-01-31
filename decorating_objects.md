@@ -232,3 +232,30 @@ class Whip extends CondimentDecorator {
 ```
 
 - Implementation Code [Starbuzz Coffee](03_starbuzz_coffee)
+
+java.io package is largely based on Decorator Pattern.
+
+Class diagram:
+
+```java
+// abstract component
+abstract class InputStream {}
+
+// the concrete components that we will wrap with decorators
+class FileInputStream extends InputStream {}
+class StringBufferInputStream extends InputStream {}
+class ByteArrayInputStream extends InputStream {}
+
+// abstract decorator
+abstract class FilterInputStream extends InputStream {}
+
+// concrete decorators
+class PushbackInputStream extends FilterInputStream {}
+class BufferedInputStream extends FilterInputStream {}
+class DataInputStream extends FilterInputStream {}
+class LineNumberInputStream extends FilterInputStream {}
+```
+
+java.io also points out one of the downsides of the Decorator Pattern: designs using this pattern often result in a large number of small classes that can be overwhelming to a developer trying to use the Decorator-based API.
+
+- Implementation Code [your Java I/O Decorator](04_java_io_decorator)
