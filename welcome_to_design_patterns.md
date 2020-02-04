@@ -29,7 +29,7 @@ a = getAnimal();
 animal.makeSound();
 ```
 
-Sample code: [Testing duck behaviors](01_duck_behavior)
+- Sample code: [Testing duck behaviors](01_duck_behavior)
 
 3. Favor **composition** over inheritance
 4. Strive for **loosely coupled designs** between objects that interact

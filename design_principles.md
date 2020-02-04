@@ -5,3 +5,4 @@
 3. Favor **composition** over inheritance
 4. Strive for **loosely coupled designs** between objects that interact
 5. **Open-Closed** Principle: classes should be open for extension, but closed for modification
+6. **Dependency Inversion** Principle: depend upon abstractions. Do not depend upon concrete classes
