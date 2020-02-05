@@ -357,4 +357,183 @@ public abstract class Pizza {
         // code to print pizza here
     }
 }
+
+public class CheesePizza extends Pizza {
+    PizzaIngredientFactory ingredientFactory;
+
+    // to make a pizza now, we need a factory to provide the ingredients
+    // so each Pizza class gets a factory passed into its constructor
+    public CheesePizza(PizzaIngredientFactory ingredientFactory) {
+        this.ingredientFactory = ingredientFactory;
+    }
+
+    void prepare() {
+        System.out.println("Preparing " + name);
+        // here's where the magic happens
+        // each time it needs an ingredient, it asks the factory to produce it
+        dough = ingredientFactory.createDough();
+        sauce = ingredientFactory.createSauce();
+        cheese = ingredientFactory.createCheese();
+    }
+}
+
+// the client of the AbstractFactory
+public class NYPizzaStore extends PizzaStore {
+    protected Pizza createPizza(String item) {
+        Pizza pizza = null;
+        // the NY Store is composed with a NY pizza ingredient factory.
+        // this will be used to produce the ingredients for all NY style pizzas
+        PizzaIngredientFactory ingredientFactory = new NYPizzaIngredientFactory();
+
+        if(item.equals("cheese")) {
+            // we now pass each pizza the factory that should be used to produce its ingredients
+            pizza = new CheesePizza(ingredientFactory);
+            pizza.setName("New York Style Cheese Pizza");
+        } else if (item.equals("veggie")) {
+            pizza = new VeggiePizza(ingredientFactory);
+            pizza.setName("New York Style Veggie Pizza");
+        } else if (item.equals("clam")) {
+            pizza = new ClamPizza(ingredientFactory);
+            pizza.setName("New York Style Clam Pizza");
+        } else if (item.equals("pepperoni")) {
+            pizza = new PepperoniPizza(ingredientFactory);
+            pizza.setName("New York Style Pepperoni Pizza");
+        }
+        return pizza;
+    }
+}
+```
+
+- an Abstract Factory provides an interface for a family of products;
+- from the abstract factory, we derive one or more concrete factories that produce the same products, but with different implementations;
+- we then write our code so that it uses the factory to create products. By passing in a variety of factories, we get a variety of implementations of those products. But our client code stays the same.
+
+### The Abstract Factory Pattern
+
+The client is decoupled from any of the specifics of the concrete products.
+
+#### The Abstract Factory Pattern - class diagram
+
+```java
+// the AbstractFactory defines the interface that all Concrete factories must implement, which consists of a set of methods for producing products
+interface AbstractFactory {
+    CreateProductA()
+    CreateProductB()
+}
+
+// the concrete factories implement the different product families. To create a product, the client uses one of these factories, so it never has to instantiate a product object
+class ConcreteFactory1 implements AbstractFactory {
+    CreateProductA()
+    CreateProductB()
+}
+class ConcreteFactory2 implements AbstractFactory {
+    CreateProductA()
+    CreateProductB()
+}
+
+// this is the product family. Each concrete factory can produce an entire set of products
+interface AbstractProductA {}
+
+class ProductA1 implements AbstractProductA {}
+class ProductA2 implements AbstractProductA {}
+
+interface AbstractProductB {}
+
+class ProductB1 implements AbstractProductB {}
+class ProductB2 implements AbstractProductB {}
+
+// the Client is written against the abstract factory and then composed at runtime with an actual factory
+class Client {}
+```
+
+Often the methods of an Abstract Factory are implemented as factory methods.
+The job of an Abstract Factory is to define an interface for creating a set of products.
+Each method in that interface is responsible for creating a concrete product. So, factory methods are a natural way to implement your product methods in your abstract factories.
+
+### The Factory Method and Abstract Factory compared
+
+The Factory Method relies on **inheritance**: object creation is delegated to subclasses which implement the factory method to create objects.
+
+The Abstract Factory relies on **object composition**: object creation is implemented in methods exposed in the factory interface.
+
+All factory patterns promote loose coupling by reducing the dependency of your application on concrete class.
+
+The intent of Factory Method is to allow a class to defer instantiation to its subclasses.
+
+The intent of Abstract Factory is to create families of related objects without having to depend on their concrete classes.
+
+#### Factory Method PizzaStore class diagram
+
+```java
+// is implemented as a Factory Method because we want to be able to create a product that varies by region: each region gets its own concrete factory that knows how to make pizzas which are appropriate for the area
+abstract class PizzaStore {
+    createPizza()
+}
+
+class NYPizzaStore extends PizzaStore {
+    // the Factory Method
+    createPizza()
+}
+class ChicagoPizzaStore extends PizzaStore {
+    // the Factory Method
+    createPizza()
+}
+
+// this is the product of the PizzaStore
+// clients only rely on this abstract type
+abstract class Pizza {}
+
+// subclasses are instantiated by the Factory Methods
+// the createPizza() method is parameterized by pizza type, so we can return many types of pizza products
+class NYStyleCheesePizza extends Pizza {}
+class NYStylePepperoniPizza extends Pizza {}
+
+class ChicagoStyleCheesePizza extends Pizza {}
+class ChicagoStylePepperoniPizza extends Pizza {}
+```
+
+#### Abstract Factory PizzaStore class diagram
+
+```java
+// is implemented as an Abstract Factory because we need to create families of products (the ingredients)
+interface PizzaIngredientFactory {
+    createDough();
+    createSauce();
+    createCheese();
+    createVeggies();
+    createPepperoni();
+    createClam();
+}
+
+// each concrete subclass creates a family of products
+class NYPizzaIngredientFactory implements PizzaIngredientFactory {
+    // methods to create products in an Abstract Factory are often implemented with a Factory Method
+    createDough();
+    createSauce();
+    createCheese();
+    createVeggies();
+    createPepperoni();
+    createClam();
+}
+class ChicagoPizzaIngredientFactory implements PizzaIngredientFactory {
+    createDough();
+    createSauce();
+    createCheese();
+    createVeggies();
+    createPepperoni();
+    createClam();
+}
+
+// the subclass decides the type of dough
+interface Dough {}
+
+// the product subclasses create parallel sets of product families
+class ThickCrustDough implements Dough {}
+class ThinCrustDough implements Dough {}
+
+// the subclass decides the type of clams
+interface Clams {}
+
+class FrozenClams implements Clams {}
+class FreshClams implements Clams {}
 ```

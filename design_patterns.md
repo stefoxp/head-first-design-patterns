@@ -12,3 +12,4 @@ Design Patterns give you a **shared vocabulary** with other developers:
 2. the **Observer Pattern** defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically;
 3. the **Decorator Pattern** attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality;
 4. the **Factory Method Pattern** defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses;
+5. the **Abstract Factory Pattern** provides an interface for creating families of related or dependent objects without specifying their concrete classes;
