@@ -15,6 +15,7 @@ Eric Freeman & Elisabeth Freeman
 2. [Keeping your Objects in the know](keeping_your_objects_in_the_know.md);
 3. [Decorating Objects](decorating_objects.md);
 4. [Baking with OO Goodness](baking_with_oo_goodness.md)
+5. [One of a Kind Objects](one_of_a_kind_objects.md)
 
 ## Book's samples
 
