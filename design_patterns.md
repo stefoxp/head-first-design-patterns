@@ -14,3 +14,4 @@ Design Patterns give you a **shared vocabulary** with other developers:
 4. the **Factory Method Pattern** defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses;
 5. the **Abstract Factory Pattern** provides an interface for creating families of related or dependent objects without specifying their concrete classes;
 6. the **Singleton Pattern** ensures a class has only one instance, and provides a global point of access to it
+7. the **Command Pattern** encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.
