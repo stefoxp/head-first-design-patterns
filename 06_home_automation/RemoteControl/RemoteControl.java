@@ -10,6 +10,8 @@ public class RemoteControl {
         onCommands = new Command[7];
         offCommands = new Command[7];
         
+        // we assign every slot a NoCommand object by default and we know
+        // we'll always have some command to call in each slot
         Command noCommand = new NoCommand();
         for (int i = 0; i < 7; i++) {
             onCommands[i] = noCommand;

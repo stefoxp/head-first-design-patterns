@@ -25,3 +25,4 @@ Eric Freeman & Elisabeth Freeman
 - [Starbuzz Coffee](03_starbuzz_coffee);
 - [Java I/O Decorator](04_java_io_decorator);
 - [Pizza Store](05_pizza_store);
+- [Home automation](06_home_automation);

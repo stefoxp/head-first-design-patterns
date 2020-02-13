@@ -52,4 +52,48 @@ class Invoker {
 class Client {}
 ```
 
+## Remote Control Application
+
 - Implementation Code [Remote Control](06_home_automation)
+
+The NoCommand object is an example of a null object.
+A null object is useful when you don't have a meaningful object to return, and yet you want to remove the responsibility for handling null from the client.
+
+### Remote Control Application - class diagram
+
+```java
+// all RemoteControl commands implement the Command interface
+// commands encapsulate a set of actions on a specific vendor class
+// the remote invokes these actions by calling the execute() method
+interface Command {
+    execute()
+}
+
+// manages a set of Command objects, one per button
+// when button is pressed, the corresponding ButtonWasPushed() method is called, which invokes the execute() method on the command
+class RemoteControl {
+    onCommands
+    offCommands
+
+    setCommand()
+    onButtonWasPushed()
+    offButtonWasPushed()
+}
+
+// creates a number of Command Objects that are loaded into the slots of the Remote Control
+class RemoteLoader {}
+
+// the Vendor Classes are used to perform the actual home-automation work of controlling devices
+class Light {
+    on()
+    off()
+}
+
+// each action that can be inviked by pressing a button on the remote is implemented with a simple Command object
+class LightOnCommand implements Command {
+    execute()
+}
+class LightOffCommand implements Command [
+    execute()
+]
+```
