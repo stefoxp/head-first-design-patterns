@@ -97,3 +97,73 @@ class LightOffCommand implements Command [
     execute()
 ]
 ```
+
+### Remote Control Application - add functionality
+
+We need to add functionality to support the undo button on the remote.
+
+Steps:
+
+- when commands support undo, they have an undo() method that mirrors the execute() method. Before we can add undo to our commands, we need to add an undo() method to the Command interface:
+
+```java
+public interface Command {
+    public void execute();
+    public void undo();
+}
+```
+
+- if the LightOnCommand's execute() method was called, then the on() method was last called. We know that undo() needs to do the opposite of this by calling the off() method:
+
+```java
+public class LightOnCommand implements Command {
+    // ...
+    public void undo() {
+        light.off();
+    }
+}
+
+public class LightOffCommand implements Command {
+    // ...
+    public void undo() {
+        light.on();
+    }
+}
+```
+
+- to add support for the undo button we only have to make a few small changes to the Remote Control class..
+We'll add a new instance variable to track the last command invoked; then, whenever the undo button is pressed, we retrieve that command and invoke its undo() method:
+
+```java
+public class RemoteControlWithUndo {
+    // ...
+    // thisi is where we'll stash the last command executed for the undo button
+    Command undoCommmand;
+
+    public RemoteControlWithUndo() {
+        // ...
+        undoCommand = noCommand;
+    }
+
+    // ...
+    // when a button is pressed we take the command and first execute it
+    // then we save a reference to it in the undoCommand instance variable
+    public void onButtonWasPushed(int slot) {
+        // ...
+        undoCommand = onCommands[slot];
+    }
+    public void offButtonWasPushed(int slot) {
+        // ...
+        undoCommand = offCommands[slot];
+    }
+
+    // when the undo button is pressed, we invoke the undo() method of the command stored in undoCommand
+    public void undoButtonWasPushed() {
+        undoCommand.undo();
+    }
+
+    // ...
+}
+```
+
+- Implementation Code [Remote Control With Undo](06_home_automation)
