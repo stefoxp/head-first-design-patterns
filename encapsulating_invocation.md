@@ -168,3 +168,89 @@ public class RemoteControlWithUndo {
 
 - Implementation Code [Remote Control With Undo](06_home_automation)
 - Implementation Code [Remote Control With Undo - using state](06_home_automation)
+
+### Remote Control Application - Party mode with macro
+
+Push one button and have the lights dimmed, the stereo and TV turned on and set to a DVD and the hot tub fired up.
+
+```java
+// without changing the remote at all with the macro command
+public class MacroCommand implements Command {
+    Command[] commands;
+
+    public MacroCommand(Command[] commands) {
+        // take an array of Commands and store them in the MacroCommand
+        this.commands = commands;
+    }
+
+    public void execute() {
+        for (int i = 0; i < commands.lenght; i++) {
+            // when the macro gets executed by the remote execute those commands one at a time
+            commands[i].execute();
+        }
+    }
+
+    public void undo() {
+        for (int i = 0; i < commands.lenght; i++) {
+            commands[i].undo();
+        }
+    }
+}
+
+// STEPS:
+
+// 1) we create the set of commands we want to go into the macro:
+
+// create all the devices
+Light light = new Light("Living Room");
+TV tv = new TV("Living Room");
+Stereo stereo = new Stereo("Living Room");
+Hottub hottub = new Hottub();
+
+// create all the On commands
+LightOnCommand lightOn = new LightOnCommand(light);
+TVOnCommand tvOn = new TVOnCommand(tv);
+StereoOnCommand stereoOn = new StereoOnCommand(stereo);
+HottubOnCommand hottubOn = new HottubOnCommand(hottub);
+
+// create all the Off commands
+LightOffCommand lightOff = new LightOffCommand(light);
+TVOffCommand tvOff = new TVOffCommand(tv);
+StereoOffCommand stereoOff = new StereoOffCommand(stereo);
+HottubOffCommand hottubOff = new HottubOffCommand(hottub);
+
+// 2) we create two arrays, one for the On commands and one for the Off commands, and load them with the corresponding commands
+Command[] partyOn = {lightOn, stereoOn, tvOn, hottubOn};
+Command[] partyOff = {lightOff, stereoOff, tvOff, hottubOff};
+
+MacroCommand partyOnMacro = new MacroCommand(partyOn);
+MacroCommand partyOffMacro = new MacroCommand(partyOff);
+
+// 3) we assign MacroCommand to a button like we always do
+remoteControl.setCommand(0, partyOnMacro, partyOffMacro);
+
+// 4) we just need to push some buttons and see if this works
+System.out.println(remoteControl);
+System.out.println("--- Pushing Macro On ---");
+remoteControl.onButtonWasPushed(0);
+System.out.println("--- Pushing Macro Off ---");
+remoteControl.offButtonWasPushed(0);
+```
+
+## More uses of the Command Pattern: queuing requests
+
+You add commands to the queue on one end, and on the other end sit a group of threads.
+Threads run the following script:
+
+- they remove a command from the queue
+- call its execute() method
+- wait for the call to finish
+- then discard the command object and retrieve a new one
+
+The job queue classes are totally decoupled from the objects that are doing the computation. They just retrieve commands and call execute().
+Likewise, as long as you put objects into the queue that implement the Command Pattern, your execute() method will be invoked when a thread is available.
+
+## More uses of the Command Pattern: logging requests
+
+The semantics of some applications require that we log all actions and be able to recover after a crash by re-invoking those actions. The Command Pattern can support these semantics with the addition of two methods: store() and load().
+As we execute commands, we store a history of them on disk. When a crash occurs, we reload the command objects and invoke their execute() methods in batch and in order.
