@@ -15,3 +15,4 @@ Design Patterns give you a **shared vocabulary** with other developers:
 5. the **Abstract Factory Pattern** provides an interface for creating families of related or dependent objects without specifying their concrete classes;
 6. the **Singleton Pattern** ensures a class has only one instance, and provides a global point of access to it;
 7. the **Command Pattern** encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undo-able operations;
+8. the **Adapter Pattern** converts the interface of a class into another interface the clients expect. Adapter lets classes work togheter that couldn't otherwise because of incompatible interfaces.

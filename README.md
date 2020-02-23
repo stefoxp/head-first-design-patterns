@@ -17,6 +17,7 @@ Eric Freeman & Elisabeth Freeman
 4. [Baking with OO Goodness](baking_with_oo_goodness.md)
 5. [One of a Kind Objects](one_of_a_kind_objects.md)
 6. [Encapsulating Invocation](encapsulating_invocation.md)
+7. [Being Adaptive](being_adaptive.md)
 
 ## Book's samples
 
