@@ -179,3 +179,90 @@ Advantages:
 - also allows you to decouple your client implementation from any one subsystem
 
 - Implementation Code [Home theater facade](08_home_theater_facade)
+
+- Definition of the Facade Pattern
+
+```java
+/* the pattern's class diagram */
+
+// unified interface that is easier to use
+class Facade {}
+
+// more complex subsystem
+class SubsystemClass1 {}
+class SubsystemClass2 {}
+class SubsystemClass3 {}
+
+// happy client whose job just became easier because of the facade
+class Client {}
+```
+
+## The Least Knowledge Principle
+
+- Definition of the Least Knowledge Principle
+
+Guides us to reduce the interactions between objects to just a few close "friends".
+
+This principle prevents us from creating designs that have a large number of classes coupled together so that changes in one part of the system cascade to other parts.
+
+Take any object, from any method in that object, the principle tells us that we should only invoke methods that belong to:
+
+- the object itself
+- objects passed in as a parameter to the method
+- any object the method creates or instantiates
+- any components of the object
+
+For example:
+
+```java
+// without the principle
+public float getTemp() {
+    // we get the thermometer object from the station and then call the getTemperature() method ourselves
+    Thermometer thermometer = station.getThermometer();
+    return thermometer.getTemperature();
+}
+
+// with the principle
+public float getTemp() {
+    // we add a method to the Station class that makes the request to the thermometer for us.
+    // this reduces the number of classes we're dependent on
+    return station.getTemperature();
+}
+```
+
+Car class sample demonstrates all the ways you can call methods and still adhere to the Principle:
+
+```java
+public class Car {
+    // a component of this class. We can call its methods
+    Engine engine;
+
+    // other instance variables
+
+    public Car() {
+        // initialize engine, etc.
+    }
+
+    // you can call a method on an object passed as parameter
+    public void start(Key key) {
+        // we're creating a new object, its methods are legal
+        Doors doors = new Doors();
+
+        // you can call a method on an object passed as parameter
+        boolean authorized = key.turns();
+
+        if (authorized) {
+            // you can call a method on a component of the object
+            engine.start();
+            // you can call a local method within the object
+            updateDashboardDisplay();
+            // you can call a method on an object you create or instantiate
+            doors.lock();
+        }
+
+        public void updateDashboardDisplay() {
+            // update display
+        }
+    }
+}
+```
