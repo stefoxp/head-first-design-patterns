@@ -2,7 +2,7 @@
 
 Eric Freeman & Elisabeth Freeman
 
-- [Book reviews on GoodReads](https://www.goodreads.com/book/show/58128.Head_First_Design_Patterns)
+- [Book reviews on GoodReads.com](https://www.goodreads.com/book/show/58128.Head_First_Design_Patterns)
 
 ## Concepts
 
@@ -18,12 +18,15 @@ Eric Freeman & Elisabeth Freeman
 5. [One of a Kind Objects](one_of_a_kind_objects.md)
 6. [Encapsulating Invocation](encapsulating_invocation.md)
 7. [Being Adaptive](being_adaptive.md)
+8. [Encapsulating Algorithms](encapsulating_algorithms.md)
 
 ## Book's samples
 
-- [Duck Behavior](01_duck_behavior);
-- [Weather Monitoring application](02_weather_monitoring_application);
-- [Starbuzz Coffee](03_starbuzz_coffee);
-- [Java I/O Decorator](04_java_io_decorator);
-- [Pizza Store](05_pizza_store);
-- [Home automation](06_home_automation);
+- [Duck Behavior](01_duck_behavior)
+- [Weather Monitoring application](02_weather_monitoring_application)
+- [Starbuzz Coffee](03_starbuzz_coffee)
+- [Java I/O Decorator](04_java_io_decorator)
+- [Pizza Store](05_pizza_store)
+- [Home automation](06_home_automation)
+- [Duck Adapter](07_duck_adapter)
+- [Home Theater Facade](08_home_theater_facade)
