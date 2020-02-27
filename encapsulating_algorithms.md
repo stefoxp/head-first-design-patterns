@@ -178,15 +178,41 @@ A template it's a method that defines an algorithm as a set of steps. One or mor
 
 ```java
 abstract class AbstractClass {
-    final templateMethod()
+    final void templateMethod() {
+        pimitiveOperation1();
+        primitiveOperation2();
+        concreteOperation();
+        hook();
+    }
     // abstract versions of the opearations used in the template method
-    abstract primitiveOperation1()
-    abstract primitiveOperation2()
+    abstract primitiveOperation1() {}
+    abstract primitiveOperation2() {}
+
+    final void concreteOperation() {
+        // a concrete operation is defined in the abstract class
+        // this one is declared final so that subclasses can't override it
+        // it may be used in the template method directly, or used by subclasses
+    }
+
+    void hook() {
+        // we can also have concrete method that do nothing by default = hook
+        // subclasses are free to override these but don't have to
+    }
+
 }
 
 // there may be many ConcreteClass, each implementing the full set of operations required by the template method
 class ConcreteClass extends AbstractClass {
-    primitiveOperation1()
-    primitiveOperation2()
+    primitiveOperation1();
+    primitiveOperation2();
 }
 ```
+
+### Hook method
+
+A hook is a method that is declared in the abstract class, but only given an empty or default implementation. This gives subclasses the ability to hook into the algorithm at various points or ignore the hook.
+
+- Implementation Code [Caffeine Beverage With Hook](09_caffeine_beverage_with_hook)
+
+- use abstract methods when your subclass must provide an implementation of the method or step in algorithm
+- use hooks when that part of the algorithm is optional
