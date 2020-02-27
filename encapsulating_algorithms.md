@@ -216,3 +216,50 @@ A hook is a method that is declared in the abstract class, but only given an emp
 
 - use abstract methods when your subclass must provide an implementation of the method or step in algorithm
 - use hooks when that part of the algorithm is optional
+
+## The Hollywood Principle
+
+- Definition of the Hollywood Principle
+
+Gives us a way to prevent dependency rot: happens when you have high-level components depending on low-level components depending on high-level components and so on.
+
+With this principle we allow low-level components to hook themselves into a system, but the high-level components determine when they are needed, and how (the high-level components give the low-level components a don't call us, we'll call you treatment).
+
+The connection between the Hollywood Principle and the Template Method Pattern is probably somewhat apparent:
+CaffeineBeverage is our high-level component. It has control over the algorithm for the recipe, and calls on the subclasses only when they're needed for an implementation of a method.
+Clients of beverages will depend on the CaffeineBeverage which reduces dependencies in the overall system.
+
+## Template Method Pattern in the Wild
+
+### Sorting
+
+The designers of the Java Arrays class have provided us with a handy template method for sorting.
+
+```java
+// we actually have two methods here and they act together to provide the sort functionality
+
+// the first method is just a helper method that creates a copy of the array and passes it along as the destination array to the mergeSort()
+public static void sort(Object[] a) {
+    Object aux[] = (Object[])a.clone();
+    mergeSort(aux, a, 0, a.lenght, 0);
+}
+
+// the mergeSort() contains the sort algorithm, and relies on an implementation of the compareTo() to complete the algorithm
+private static void mergeSort(Object src[], Object dest[], int low, int high, int off) {
+    /* think of this as the template method */
+
+    for (int i = low; i < high; i++) {
+        // compareTo() is the method we need to implement to "fill out" the template method
+        for (int j = i; j > low && ((Comparable)dest[j - i]).compareTo((Comparable)dest[j]) > 0; j--) {
+            // this is a concrete method, already defined in the Arrays class
+            swap(dest, j, j - 1);
+        }
+    }
+    return;
+}
+```
+
+The sort() method needs to know that you've implemented the compareTo() method.
+The compareTo() method compares two objects and returns whether one is less than, greater than, or equal to the other.
+
+- Implementation Code [Duck sorting](10_duck_sorting)

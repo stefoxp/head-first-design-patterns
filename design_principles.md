@@ -7,3 +7,4 @@
 5. **Open-Closed** Principle: classes should be open for extension, but closed for modification
 6. **Dependency Inversion** Principle: depend upon abstractions. Do not depend upon concrete classes
 7. **Least Knowledge** Principle: talk only to your immediate friends (**Law of Demeter**)
+8. **Hollywood** Principle: don't call us, we'll call you
