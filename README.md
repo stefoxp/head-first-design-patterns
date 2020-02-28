@@ -31,3 +31,4 @@ Eric Freeman & Elisabeth Freeman
 - [Duck Adapter](07_duck_adapter)
 - [Home Theater Facade](08_home_theater_facade)
 - [Caffeine Beverage With Hook](09_caffeine_beverage_with_hook)
+- [Duck sorting](10_duck_sorting)

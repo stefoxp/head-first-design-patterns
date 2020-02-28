@@ -263,3 +263,18 @@ The sort() method needs to know that you've implemented the compareTo() method.
 The compareTo() method compares two objects and returns whether one is less than, greater than, or equal to the other.
 
 - Implementation Code [Duck sorting](10_duck_sorting)
+
+### Swinging with Frames
+
+JFrame it's the most basic Swing container and inherits a paint() method (it's a hook method). By overriding paint(), you can insert yourself into JFrame's algorithm for displaying its area of the screen and have your own graphic output incorporated into the JFrame.
+
+JFrame' update algorithm calls paint(). By default, paint() does nothing: it's a hook.
+
+### Applets
+
+Any applet must subclass Applet, and this class provides several hooks:
+
+- the init() hook allows the applet to do whatever it wants to initialize the applet the first time
+- the start() hook allows the applet to do something when the applet is just about to be displayed on the web page
+- the stop() hook is used if the user goes to another page
+- the destroy() hook is used when the applet is going to be destroyed
