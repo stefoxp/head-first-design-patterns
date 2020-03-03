@@ -8,3 +8,4 @@
 6. **Dependency Inversion** Principle: depend upon abstractions. Do not depend upon concrete classes
 7. **Least Knowledge** Principle: talk only to your immediate friends (**Law of Demeter**)
 8. **Hollywood** Principle: don't call us, we'll call you
+9. **Single Responsibility** Principle: a class should have only one reason to change

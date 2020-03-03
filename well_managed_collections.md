@@ -7,146 +7,11 @@ How you can allow your clients to iterate through your objects without ever gett
 
 The Diner menu has lots of lunch items, while the Pancake House consists of breakfast items. Every menu item has a name, a description, and a price.
 
-```java
-public class MenuItem {
-    String name;
-    String description;
-    boolean vegetarian;
-    double price;
-
-    // a MenuItem consists of a name, a description, a flag to indicate if the item is vegetarian, and a price
-    public MenuItem(String name,
-                    String description,
-                    boolean vegetarian,
-                    double price)
-    {
-        this.name = name;
-        this.description = description;
-        this.vegetarian = vegetarian;
-        this.price = price;
-    }
-
-    // these getter methods let you access the fields of the menu item
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public boolean isVegetarian() {
-        return vegetarian;
-    }
-}
-```
-
 Both have lots of time and code invested in the way they store their menu items in a menu, and lots of other code that depends on it.
 
-```java
-// on the Pancake House they use an ArrayList that makes the menu easily to expand
-public class PancakeHouseMenu {
-    ArrayList menuItems;
+On the Pancake House they use an ArrayList that makes the menu easily to expand
 
-    public PancakeHouseMenu() {
-        menuItems = new ArrayList();
-
-        // each menu item is added to the ArrayList here, in the constructor
-
-        addItem("K&B' Pancake Breakfast",
-            "Pancake with scrambled eggs, and toast",
-            true,
-            2.99);
-
-        addItem("Regular Pancake Breakfast",
-            "Pancake with fried eggs, sausage",
-            false,
-            2.99);
-
-        addItem("Blueberry Pancakes",
-            "Pancakes made with fresh blueberries",
-            true,
-            3.49);
-
-        addItem("Waffles",
-            "Waffles, with your choice of blueberries or strawberries",
-            true,
-            3.59);
-    }
-
-    public void addItem(String name,
-                        String description,
-                        boolean vegetarian,
-                        double price) {
-        // to add a menu item, creates a new MenuItem object, passing in each argument, and then adds it to the ArrayList
-        MenuItem menuItem = new MenuItem(name, description, vegetarian, price);
-        menuItems.add(menuItem);
-    }
-
-    public ArrayList getMenuItems() {
-        return menuItems;
-    }
-
-    // a bunch of other menu code that depends on the ArrayList implementation
-}
-
-// on the Diner they use an Array so they control the maximum size of their menu and get their MenuItems without having to use a cast
-
-public class DinerMenu {
-    static final int MAX_ITEMS = 6;
-    int numberOfItems = 0;
-    MenuItem[] menuItems;
-
-    public DinerMenu() {
-        menuItems = new MenuItem[MAX_ITEMS];
-
-        addItem("Vegetarian BLT",
-            "(Fakin') Bacon with lettuce & tomato on whole wheat",
-            true,
-            2.99);
-
-        addItem("BLT",
-            "Bacon with lettuce & tomato on whole wheat",
-            false,
-            2.99);
-
-        addItem("Soup of the day",
-            "Soup of the day, with a side of potato salad",
-            false,
-            3.29);
-
-        addItem("Hotdog",
-            "A hot dog, with saurkraut, relish, onions, topped with cheese",
-            false,
-            3.05);
-    }
-
-    public void addItem(String name,
-                        String description,
-                        boolean vegetarian,
-                        double price) {
-        MenuItem menuItem = new MenuItem(name, description, vegetarian, price);
-        // checks to make sure we haven't hit the menu size limit
-        if (numberOfItems >= MAX_ITEMS) {
-            System.err.println("Sorry, menu is full! Can't add item to menu");
-        } else {
-            menuItems[numberOfItems] = menuItem;
-            numberOfItems = numberOfItems + 1;
-        }
-    }
-
-    public MenuItem[] getMenuItems() {
-        return menuItems;
-    }
-
-    // bunch of code that depends on the implementation of his menu being an Array
-}
-```
+On the Diner they use an Array so they control the maximum size of their menu and get their MenuItems without having to use a cast
 
 Having two different menu representations complicates things.
 
@@ -186,7 +51,7 @@ while (iterator.hasNext()) {
 }
 ```
 
-## The Iterator Pattern
+### The Iterator Pattern
 
 This pattern relies on an interface called Iterator
 
@@ -247,3 +112,122 @@ class DinerMenuIterator implements Iterator {
 - the iterator give us a way to step through the elements of an aggregate without forcing the aggregate to clutter its own interface with a bunch of methods to support traversal of its elements
 - it also allows the implementation of the iterator to live outside of the aggregate (we've encapsulated the interaction)
 
+### Cleaning with java.util.Iterator
+
+#### PancakeHouseMenu class
+
+We just:
+
+- delete the PancakeHouseMenuIterator class
+- add an import java.util.Iterator to the top of PancakeHouseMenu
+- change one line of the PancakeHouseMenu
+
+```java
+public Iterator createIterator() {
+    // instead of creating our own iterator now
+    // we just call the iterator() method on the menuItems ArrayList
+    return menuItems.iterator();
+}
+```
+
+#### DinerMenuIterator
+
+We change the DinerMenuIterator class:
+
+- add an import java.util.Iterator to the top
+- add the remove() method
+
+```java
+import java.util.Iterator;
+
+public class DinerMenuIterator implements Iterator {
+    // none of our current implementation changes
+
+    // we do need to implement remove()
+    public void remove() {
+        if (position <= 0) {
+            throw new IllegalStateException ("You can't remove an item you've done at least one next()");
+        }
+        // we just shift all the elements up one when remove() is called
+        if (list[position-1] != null) {
+            for (int i = position-1; i < (list.length-1); i++) {
+                list[i] = list[i+1];
+            }
+            list[list.length-1] = null;
+        }
+    }
+}
+```
+
+#### Waitress
+
+We need to give the Menus a common interface and rework the Waitress.
+
+```java
+public interface Menu {
+    // lets clients get an iterator for the items in the menu
+    public Iterator createIterator();
+}
+```
+
+We need to add an *implements Menu* to both the PancakeHouseMenu and the DinerMenu class definitions.
+
+```java
+import java.util.Iterator;
+
+public class Waitress {
+    Menu pancakeHouseMenu;
+    Menu dinerMenu;
+
+    // we need to replace the concrete Menu classes with the Menu Interface
+    public Waitress(Menu pancakeHouseMenu, Menu dinerMenu) {
+        this.pancakeHouseMenu = pancakeHouseMenu;
+        this.dinerMenu = dinerMenu;
+    }
+
+    // nothing changes here
+    public void printMenu() {}
+}
+```
+
+- Definition of the Iterator Pattern
+
+The effect of using iterators in your design is just as important:
+
+1. once you have a uniform way of accessing the elements of all your aggregate objects, you can write polymorphic code that works with any of these aggregates
+2. the Iterator Pattern takes the responsibility of traversing elements and gives that responsibility to the iterator object, not the aggregate object.
+
+```java
+// class diagram
+
+// having a common interface is handy for your client
+// it decouples your client from the implementation of your collection of objects
+interface Aggregate {
+    createIterator()
+}
+
+// has a collection of objects
+// each ConcreteAggregate is responsible for instantiating a ConcreteIterator that can iterate over its collection of objects
+class ConcreteAggregate implements Aggregate {
+    createIterator()
+}
+
+// the interface that all iterators must implement
+interface Iterator {
+    hasNext()
+    next()
+    remove()
+}
+
+// is responsible for managing the current position of the iteration
+class ConcreteIterator implements Iterator {
+    hasNext()
+    next()
+    remove()
+}
+
+// interact with the interfaces
+class Client {}
+```
+
+- Definition of the Single Responsibility Principle
