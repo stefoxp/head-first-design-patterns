@@ -8,4 +8,4 @@
 6. **Dependency Inversion** Principle: depend upon abstractions. Do not depend upon concrete classes
 7. **Least Knowledge** Principle: talk only to your immediate friends (**Law of Demeter**)
 8. **Hollywood** Principle: don't call us, we'll call you
-9. **Single Responsibility** Principle: a class should have only one reason to change
+9. **Single Responsibility** Principle: a class should have only one reason to change. **Cohesion** is a measure of how closely a class or a module supports a single purpose or responsibility.

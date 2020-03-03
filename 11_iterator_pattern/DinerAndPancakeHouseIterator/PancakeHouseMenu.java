@@ -1,3 +1,5 @@
+package DinerAndPancakeHouseIterator;
+
 import java.awt.*;
 import java.util.ArrayList;
 

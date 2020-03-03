@@ -1,4 +1,7 @@
-import java.awt.*;
+package Cafe;
+
+import DinerAndPancakeHouseIterator.MenuItem;
+import java.util.Iterator;
 
 /**
  * concrete Iterator that works for the Diner menu
@@ -35,5 +38,19 @@ public class DinerMenuIterator implements Iterator {
         MenuItem menuItem = items[position];
         position = position + 1;
         return menuItem;
+    }
+    
+    // we do need to implement remove()
+    public void remove() {
+        if (position <= 0) {
+            throw new IllegalStateException ("You can't remove an item you've done at least one next()");
+        }
+        // we just shift all the elements up one when remove() is called
+        if (items[position-1] != null) {
+            for (int i = position-1; i < (items.length-1); i++) {
+                items[i] = items[i+1];
+            }
+            items[items.length-1] = null;
+        }
     }
 }

@@ -1,3 +1,5 @@
+package DinerAndPancakeHouseIterator;
+
 import java.util.ArrayList;
 
 public class PancakeMenuIterator implements Iterator {

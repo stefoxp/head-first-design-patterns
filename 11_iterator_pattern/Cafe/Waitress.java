@@ -1,35 +1,41 @@
-import java.awt.*;
+package Cafe;
+
+import DinerAndPancakeHouseIterator.MenuItem;
+import java.util.Iterator;
 
 public class Waitress {
-    PancakeHouseMenu pancakeHouseMenu;
-    DinerMenu dinerMenu;
+    Menu pancakeHouseMenu;
+    Menu dinerMenu;
+    // the menu is passed into the Waitress in the constructor with the other
+    // and we stash it in an instance variable
+    Menu cafeMenu;
 
-    /**
-     * takes the two menus
-     * @param pancakeHouseMenu
-     * @param dinerMenu
-     */
-    public Waitress(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu) {
+    public Waitress(Menu pancakeHouseMenu, Menu dinerMenu, Menu cafeMenu) {
         this.pancakeHouseMenu = pancakeHouseMenu;
         this.dinerMenu = dinerMenu;
+        this.cafeMenu = cafeMenu;
     }
 
     public void printMenu() {
-        // creates two iterators, one for each menu
+        // creates one iterator for each menu
         Iterator pancakeIterator = pancakeHouseMenu.createIterator();
         Iterator dinerIterator = dinerMenu.createIterator();
+        Iterator cafeIterator = cafeMenu.createIterator();
 
         System.out.println("MENU\n----\nBREAKFAST");
-
         // then calls the overloaded printMenu() with each iterator
         printMenu(pancakeIterator);
+        
         System.out.println("\nLUNCH");
         printMenu(dinerIterator);
+        
+        System.out.println("\nDINNER");
+        printMenu(cafeIterator);
     }
 
     /**
-     * uses the Iterator to step through the menu items and print them
-     * @param iterator
+     * Nothing changes here
+     * @param iterator 
      */
     private void printMenu(Iterator iterator) {
         // test if there are any more items

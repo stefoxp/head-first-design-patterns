@@ -67,7 +67,7 @@ interface Iterator {
 
 We can implement Iterators for any kind of collection of objects: arrays, lists, hashtables,...
 
-- Implementation Code [Diner and Pancake House Iterator](11_diner_and_pancake_iterator)
+- Implementation Code [Diner and Pancake House Iterator](11_diner_and_pancake_iterator/DinerAndPancakeHouseIterator)
 
 Once we gave a PancakeHouseMenuIterator and a DinerMenuIterator, all they had to do was add a getIterator() method and they were finished.
 The Waitress will be much easier to maintain and extend down the road.
@@ -230,4 +230,18 @@ class ConcreteIterator implements Iterator {
 class Client {}
 ```
 
+## The Responsibility Principle
+
+Every responsibility of a class is an area of potential change.
+This principle guides us to keep each class to a single responsibility.
+
 - Definition of the Single Responsibility Principle
+
+Separating responsibility in design is one of the most difficult things to do.
+
+- Implementation Code [Cafe](11_diner_and_pancake_iterator/Cafe)
+
+Java gives you a lot of collection classes that allow you to store and retrieve groups of objects (es. Vector and LinkedList).
+Most have different interfaces.
+But almost all of them support a way to obtain an iterator.
+And if they don't support Iterator, that's ok, because now you know how to build your own.

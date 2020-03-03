@@ -1,3 +1,5 @@
+package DinerAndPancakeHouseIterator;
+
 public class MenuTestDrive {
     public static void main(String args[]) {
         // we create the new menus

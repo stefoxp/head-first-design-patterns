@@ -1,3 +1,5 @@
+package DinerAndPancakeHouseIterator;
+
 public class MenuItem {
     String name;
     String description;
