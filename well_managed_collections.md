@@ -241,7 +241,117 @@ Separating responsibility in design is one of the most difficult things to do.
 
 - Implementation Code [Cafe](11_diner_and_pancake_iterator/Cafe)
 
+## Iterators and Collections
+
 Java gives you a lot of collection classes that allow you to store and retrieve groups of objects (es. Vector and LinkedList).
 Most have different interfaces.
 But almost all of them support a way to obtain an iterator.
 And if they don't support Iterator, that's ok, because now you know how to build your own.
+
+Each of these classes implements the *java.util.Collection interface*, which contains a bunch of useful methods for manipulating groups of objects:
+
+- add(), addAll(), clear(), remove(), removeAll() -> add and remove elements from your collection without even knowing how it's implemented
+- iterator() get an Iterator for any class that implements the Collection interface
+- size() to get the number of elements
+- toArray() to turn your collection into an array
+
+Java 5 includes a new form of the **for** statement, called for/in, that lets you iterate over a collection or an array without create explicitly an iterator.
+
+```java
+for (Object obj: collection) {
+    // ...
+}
+```
+
+The Waitress implementation needs one call to printMenu() for each menu.
+This is violation of the Open Closed Principle.
+We need a way to manage the menu objects together.
+
+```java
+// solution: package the menus up into an ArrayList and then get its iterator to iterate through each Menu
+public class Waitress {
+    ArrayList menus;
+
+    // now we just take an ArrayList of menus
+    public Waitress(ArrayList menus) {
+        this.menus = menus;
+    }
+
+    public void printMenu() {
+        Iterator menuIterator = menus.iterator();
+        // we iterate through the menus
+        // passing each menu's iterator to the overloaded printMenu() method
+        while (menuIterator.hasNext()) {
+            Menu menu = (Menu)menuIterator.next();
+            printMenu(menu.createIterator());
+        }
+    }
+
+    public void printMenu(Iterator iterator) {
+        // no code changes here
+    }
+}
+// this looks pretty good, although we've lost the names of the menus
+```
+
+## Add a sub-menu
+
+We can't assign a sub-menu to a MenuItem array.
+Time for a change.
+
+We need out of our new design:
+
+- some kind of a three shaped structure that will accomodate menus, sub-menus and menu items
+- to make sure we maintain a way to traverse the items in each menu that is at least as convenient as what we are doing now with iterators
+- to be able traverse the items in a more flexible manner
+
+## The Composite Pattern
+
+- Definition of the Composite Pattern
+
+### A tree structure
+
+Elements with child elements are called nodes.
+Elements without children are called leaves.
+
+This pattern gives us a way to create a tree structure that can handle a nested group of menus and menu items in the same structure.
+The Menus are nodes and MenuItems are leaves.
+On this hierarchy any menu is a *composition* because it can contain both other menus and menu items. The individual objects are just the menu items.
+Using a design that follows the Composite Pattern is going to allow us to write some simple code that can apply the same operation over the entire menu structure.
+
+### The Composite Pattern class diagram
+
+```java
+// defines an interface for all objects in the composition
+class Component {
+    // may implement a default behavior for add(), remove(), getChild()
+    // and its operations
+    operation()
+    add(Component)
+    remove(Component)
+    getChild(int)
+}
+
+// defines the behavior for the elements in the composition
+// by implementing the operations the Composite supports
+class Leaf extends Component {
+    // also inherits methods like add(), remove() and getChild()
+    // which don't necessarily make a lot of sense for a leaf node
+    operation()
+
+    // a leaf has no children
+}
+
+// defines behavior of the components having children and stores child components
+class Composite extends Component {
+    // also implements the leaf-related operations
+    // some of these may not make sense on a Composite
+    operation()
+    add(Component)
+    remove(Component)
+    getChild(int)
+}
+
+// uses the Component interface to manipulate the objects in the composition
+class Client {}
+```
