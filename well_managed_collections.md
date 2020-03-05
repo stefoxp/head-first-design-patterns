@@ -67,7 +67,7 @@ interface Iterator {
 
 We can implement Iterators for any kind of collection of objects: arrays, lists, hashtables,...
 
-- Implementation Code [Diner and Pancake House Iterator](11_diner_and_pancake_iterator/DinerAndPancakeHouseIterator)
+- Implementation Code [Diner and Pancake House Iterator](11_iterator_pattern/DinerAndPancakeHouseIterator)
 
 Once we gave a PancakeHouseMenuIterator and a DinerMenuIterator, all they had to do was add a getIterator() method and they were finished.
 The Waitress will be much easier to maintain and extend down the road.
@@ -239,7 +239,7 @@ This principle guides us to keep each class to a single responsibility.
 
 Separating responsibility in design is one of the most difficult things to do.
 
-- Implementation Code [Cafe](11_diner_and_pancake_iterator/Cafe)
+- Implementation Code [Cafe](11_iterator_pattern/Cafe)
 
 ## Iterators and Collections
 
@@ -355,3 +355,51 @@ class Composite extends Component {
 // uses the Component interface to manipulate the objects in the composition
 class Client {}
 ```
+
+### Menu with Composite class diagram
+
+We need to create a component interface; this acts as the common interface for both menus and menu items and allows us to treat them uniformly.
+
+```java
+// represents the interface for both MenuItem and Menu
+// we've used an abstract class here because we want to provide
+// default implementations for these methods
+abstract class MenuComponent {
+    // we have some of the same methods from our previous versions of MenuItem and Menu
+    getName()
+    getDescription()
+    getPrice()
+    isVegetarian()
+    // we have added print(), add(), remove() and getChild()
+    print()
+    // methods for manipulating the components
+    add(Component)
+    remove(Component)
+    getChild(int)
+}
+
+// uses the MenuComponent interface to access both Menus and MenuItems
+class Waitress {}
+
+class MenuItem extends MenuComponent {
+    // overrides the methods that make sense
+    getName()
+    getDescription()
+    getPrice()
+    isVegetarian()
+    // overrides print
+    print()
+}
+
+class Menu extends MenuComponent {
+    // overrides the methods that make sense
+    getName()
+    getDescription()
+    print()
+    add(Component)
+    remove(Component)
+    getChild(int)
+}
+```
+
+- Implementation Code [Menu Composite](11_iterator_pattern/MenuComposite)
