@@ -33,4 +33,4 @@ Eric Freeman & Elisabeth Freeman
 - [Home Theater Facade](08_home_theater_facade)
 - [Caffeine Beverage With Hook](09_caffeine_beverage_with_hook)
 - [Duck sorting](10_duck_sorting)
-- [Diner and Pancake Iterator](11_diner_and_pancake_iterator)
+- [Iterator Pattern and Composite Pattern](11_iterator_pattern)

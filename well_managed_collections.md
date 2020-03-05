@@ -403,3 +403,4 @@ class Menu extends MenuComponent {
 ```
 
 - Implementation Code [Menu Composite](11_iterator_pattern/MenuComposite)
+- Implementation Code [Menu Composite with Iterator](11_iterator_pattern/MenuCompositeWithIterator)
