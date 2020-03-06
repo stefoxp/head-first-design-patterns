@@ -20,6 +20,7 @@ Eric Freeman & Elisabeth Freeman
 7. [Being Adaptive](being_adaptive.md)
 8. [Encapsulating Algorithms](encapsulating_algorithms.md)
 9. [Well-Managed Collections](well_managed_collections.md)
+10. [The State of Things](the_state_of_things.md)
 
 ## Book's samples
 
@@ -34,3 +35,4 @@ Eric Freeman & Elisabeth Freeman
 - [Caffeine Beverage With Hook](09_caffeine_beverage_with_hook)
 - [Duck sorting](10_duck_sorting)
 - [Iterator Pattern and Composite Pattern](11_iterator_pattern)
+- [Gumball Machine](12_gumball_machine)
