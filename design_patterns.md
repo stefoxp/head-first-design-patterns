@@ -20,3 +20,4 @@ Design Patterns give you a **shared vocabulary** with other developers:
 10. the **Template Method** Pattern defines the skeleton of an algorithm in a method, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure
 11. the **Iterator** Pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation
 12. the **Composite** Pattern allows you to compose objects into three structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
+13. the **State** Pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class.

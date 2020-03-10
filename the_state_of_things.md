@@ -131,3 +131,54 @@ class WinnerState implements State {
 ```
 
 - Implementation Code [Gumball Machine with State Pattern](12_gumball_machine)
+
+You now have a Gumball Machine implementation that is structurally quite different from your first version, and yet functionally it is exactly the same.
+
+Structural changes, you've:
+
+- localized the behavior of each state into its own class
+- removed all the troublesome **if** statements that would have been difficult to maintain
+- closed each state for modification, and yet left the Gumball Machine open to extension by adding new state classes
+- created a code base and class structure that maps much more closely to the Mighty Gumball diagram and is easier to read and understand
+
+Functional aspects:
+
+- the Gumball Machine now holds an instance of each State class
+  - the current state of the machine is always one of these class instance
+- when an action is called, it is delegated to the current state
+- the machine enters the Sold state and a gumball is dispensed and then the machine will either go to the SoldOut or NoQuarter state depending on the number of gumball remaining in the machine
+
+## The State Pattern
+
+- Definition of the **State** Pattern
+
+```java
+/* class diagram */
+
+// the State interface defines a common interface for all concrete states (the states are interchangeable)
+class State {
+    handle()
+}
+
+// handle requests from the Context.
+// Each ConcreteState provides its own implementation for a request
+// when the Context changes state, its behavior will change as well
+class ConcreteStateA extends State {
+    handle()
+}
+class ConcreteStateB extends State {
+    handle()
+}
+
+// is the class that can have a number of internal states
+class Context {
+    // whenever the request() is made on the Context it is delagated to the state to handle -> state.handle()
+    request()
+}
+```
+
+This class diagram is exactly the same we use for the **Strategy** Pattern.
+The two patterns differ in their intent.
+
+In general, think of the Strategy Pattern as a flexible alternative to sub-classing. With Strategy you can change the behavior by composing with a different object.
+Think of the State Pattern as an alternative to putting lots of conditionals in your context; by encapsulating the behaviours within state objects, you can simply change the state object in context to change its behavior.
