@@ -182,3 +182,5 @@ The two patterns differ in their intent.
 
 In general, think of the Strategy Pattern as a flexible alternative to sub-classing. With Strategy you can change the behavior by composing with a different object.
 Think of the State Pattern as an alternative to putting lots of conditionals in your context; by encapsulating the behaviours within state objects, you can simply change the state object in context to change its behavior.
+
+- Implementation Code [Gumball Machine 1 in 10 Game](12_gumball_machine)

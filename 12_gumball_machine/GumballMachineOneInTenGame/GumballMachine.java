@@ -1,17 +1,18 @@
-package GumballMachineWithStatePattern;
-import GumballMachineWithStatePattern.State;
+package GumballMachineOneInTenGame;
 
 public class GumballMachine {
     State soldOutState;
     State noQuarterState;
     State hasQuarterState;
     State soldState;
+    // all you need to add here is the new winnerState
+    // and initialize it in the constructor
+    State winnerState;
     
-    // the instance variable
     State state = soldOutState;
-    // keeps track of the number of gumballs in the machine
     int count = 0;
     
+    // methods here
     // takes an initial inventory of gumballs
     public GumballMachine(int numberGumballs) {
         // creates the State instances, one of each
@@ -78,16 +79,15 @@ public class GumballMachine {
     }
 
     State getHasQuarterState() {
-        // TODO: implementation code
-        throw new UnsupportedOperationException("Not supported yet.");
+        return hasQuarterState;
     }
 
     State getNoQuarterState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return noQuarterState;
     }
 
     State getSoldState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return soldState;
     }
 
     public int getCount() {
@@ -95,7 +95,11 @@ public class GumballMachine {
     }
 
     State getSoldOutState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return soldOutState;
     }
-    
+    /* don't forget you also have to add a getter method for winnerState too */
+
+    State getWinnerState() {
+        return winnerState;
+    }
 }
