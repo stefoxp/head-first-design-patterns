@@ -172,7 +172,7 @@ class ConcreteStateB extends State {
 
 // is the class that can have a number of internal states
 class Context {
-    // whenever the request() is made on the Context it is delagated to the state to handle -> state.handle()
+    // whenever the request() is made on the Context it is delegated to the state to handle -> state.handle()
     request()
 }
 ```
@@ -181,6 +181,14 @@ This class diagram is exactly the same we use for the **Strategy** Pattern.
 The two patterns differ in their intent.
 
 In general, think of the Strategy Pattern as a flexible alternative to sub-classing. With Strategy you can change the behavior by composing with a different object.
-Think of the State Pattern as an alternative to putting lots of conditionals in your context; by encapsulating the behaviours within state objects, you can simply change the state object in context to change its behavior.
+Think of the State Pattern as an alternative to putting lots of conditionals in your context; by encapsulating the behaviors within state objects, you can simply change the state object in context to change its behavior.
 
 - Implementation Code [Gumball Machine 1 in 10 Game](12_gumball_machine)
+
+Some aspects of the Gumball Machine:
+
+- we've got a lot of duplicate code in the Sold and Winning states and we might want to clean those up.
+We could make State into an abstract class and build in some default behavior for the methods.
+- the dispense() method always gets called. We could easily fix this by having turnCrank() return a boolean, or by introducing exceptions.
+- all of the intelligence for the state transitions is in the State classes
+- if you will be instantiating a lot of GumballMachine objects, you may want to move the state instances into static instance variables and share them
