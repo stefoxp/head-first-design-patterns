@@ -1,8 +1,14 @@
 # Head First - Design Patterns
 
-Eric Freeman & Elisabeth Freeman
+This is my summary of the "Head First - Design Patterns", by Eric Freeman & Elisabeth Freeman.
 
 - [Book reviews on GoodReads.com](https://www.goodreads.com/book/show/58128.Head_First_Design_Patterns)
+
+I use it while learning and as quick reference. It is not intended to be an standalone substitution of the book so if you really want to learn the concepts here presented, buy and read the book and use this repository as a reference and guide.
+
+If you are the publisher and think this repository should not be public, just write me on [http://linkedin.com/in/stepasquini](http://linkedin.com/in/stepasquini) and I will make it private.
+
+Contributions: Issues, comments and pull requests are welcome.
 
 ## Concepts
 
@@ -21,8 +27,9 @@ Eric Freeman & Elisabeth Freeman
 8. [Encapsulating Algorithms](encapsulating_algorithms.md)
 9. [Well-Managed Collections](well_managed_collections.md)
 10. [The State of Things](the_state_of_things.md)
+11. [Controlling Object Access](controlling_object_access.md)
 
-## Book's samples
+## Book's samples (my interpretation)
 
 - [Duck Behavior](01_duck_behavior)
 - [Weather Monitoring application](02_weather_monitoring_application)
